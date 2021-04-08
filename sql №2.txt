@@ -1,0 +1,1 @@
+SELECT BillingCity FROM Invoice ORDER BY Total DESC LIMIT 3
