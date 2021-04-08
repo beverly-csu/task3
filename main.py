@@ -39,6 +39,7 @@ def track_sorter(track_list, src_dir='', dst_dir=''):
                 cut_and_paste(dst_path, true_name, track_name, full_path)
         else:
             print('У файла <', track_name, '> отсутствуют ID3 теги.')
+    print('Сортировка прошла успешно!')
 
 
 def music_list(src_dir):
@@ -69,6 +70,18 @@ def main():
         print('Папка назначения:', os.path.abspath(args.dst))
     else:
         dst_dir = os.getcwd()
+    if not os.path.exists(src_dir):
+        print('Исходной директории не существует.')
+        exit(0)
+    if not os.path.exists(dst_dir):
+        print('Конечной директории не существует.')
+        exit(0)
+    if not os.access(src_dir, os.W_OK) and not os.access(src_dir, os.R_OK):
+        print('У скрипта нет прав на чтение/запись в директории исходных файлов.')
+        exit(0)
+    if not os.access(dst_dir, os.W_OK) and not os.access(dst_dir, os.R_OK):
+        print('У скрипта нет прав на чтение/запись в директории конечных файлов.')
+        exit(0)
     track_list = music_list(src_dir)
     track_sorter(track_list, src_dir, dst_dir)
 
