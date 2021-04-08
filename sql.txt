@@ -1,0 +1,4 @@
+SELECT Customer.FirstName, LastName, Phone FROM Invoice,Customer
+WHERE Invoice.CustomerId = Customer.CustomerId AND 
+(SELECT COUNT(*) FROM Invoice WHERE BillingCity = Customer.City ) > 1 
+GROUP BY Customer.FirstName
